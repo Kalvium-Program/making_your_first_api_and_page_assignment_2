@@ -1,56 +1,39 @@
-// Boilerplate Code for HTTP Status Code API
-const express = require('express');
-const app = express();
+const express = require('express'); // Ensure Express is imported
+const app = express(); // Initialize Express
 
-/*
-Task:
-You need to create an API that helps users understand different HTTP status codes and their meanings.
+const PORT = 3000; // Define the port the server will run on
 
-Requirements:
-1. Create a GET endpoint at "/status-info".
-2. The endpoint should accept a "code" as a query parameter (e.g., /status-info?code=200).
-3. Based on the status code provided, the API should respond with:
-   a. The status code.
-   b. A description of the status code.
+// Define the GET endpoint
+app.get('/status-info', (req, res) => {
+    const { code } = req.query; // Extract 'code' from query parameters
 
-Example Responses:
-- For 200 (OK):
-  Request: /status-info?code=200
-  Response:
-  {
-    "status": 200,
-    "message": "OK: The request has succeeded. The meaning of this status depends on the HTTP method used."
-  }
+    // Check if 'code' query parameter is provided
+    if (!code) {
+        return res.status(400).json({ error: "Please provide a 'code' query parameter" });
+    }
 
-- For 404 (Not Found):
-  Request: /status-info?code=404
-  Response:
-  {
-    "status": 404,
-    "message": "Not Found: The server has not found anything matching the request URI. This is often caused by a missing page or resource."
-  }
+    // Map of HTTP status codes and their descriptions
+    const statusCodes = {
+        200: "OK - The request was successful.",
+        404: "Not Found - The requested resource could not be found.",
+        500: "Internal Server Error - The server encountered an unexpected condition.",
+        400: "Bad Request - The request could not be understood or was missing required parameters.",
+        401: "Unauthorized - Authentication is required or has failed.",
+        // Add additional status codes as needed
+    };
 
-- For 500 (Internal Server Error):
-  Request: /status-info?code=500
-  Response:
-  {
-    "status": 500,
-    "message": "Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request."
-  }
+    // Get the description for the provided code
+    const description = statusCodes[code];
 
-- For 400 (Bad Request):
-  Request: /status-info?code=400
-  Response:
-  {
-    "status": 400,
-    "message": "Bad Request: The server cannot process the request due to client-side errors (e.g., malformed syntax)."
-  }
+    // Check if the code is valid
+    if (!description) {
+        return res.status(404).json({ error: "Invalid status code provided." });
+    }
 
-List of Status Codes to Handle:
-200, 201, 204, 400, 401, 403, 404, 405, 429, 500, 502, 503, 504
-*/
+    // Respond with the code and description
+    res.json({ code, description });
+});
 
-const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Status Code API is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
