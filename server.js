@@ -10,7 +10,7 @@ Requirements:
 1. Create a GET endpoint at "/status-info".
 2. The endpoint should accept a "code" as a query parameter (e.g., /status-info?code=200).
 3. Based on the status code provided, the API should respond with:
-   a. The status code.
+   a. The status code.a
    b. A description of the status code.
 
 Example Responses:
