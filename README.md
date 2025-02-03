@@ -11,7 +11,7 @@ The **HTTP Status Code API** is a tool to help developers learn and understand H
 ### **HTTP Status Code API**
 
 #### **Endpoint:**
-**GET** `/status-info?code=<status_code>`
+**GET** `/status-info?code=<status_code>`;
 
 #### **Request Parameters:**
 - **code (required):** The HTTP status code to query, sent as a query parameter.
