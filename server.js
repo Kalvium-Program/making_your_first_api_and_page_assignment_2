@@ -14,7 +14,7 @@ Requirements:
    b. A description of the status code.
 
 Example Responses:
-- For 200 (OK):
+- For 200 (OK): sand
   Request: /status-info?code=200
   Response:
   {
