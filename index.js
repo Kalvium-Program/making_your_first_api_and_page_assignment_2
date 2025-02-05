@@ -34,6 +34,7 @@ app.get('/assistant/greet', (req, res) => {
     });
 });
 
+
 // Default route for the root URL
 app.get('/', (req, res) => {
     res.send('Welcome to the HTTP Status Code API and Virtual Assistant API!');
